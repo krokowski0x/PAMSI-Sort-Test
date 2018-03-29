@@ -1,0 +1,32 @@
+$main-color: #000000;
+
+* {
+  background-color: $main-color;
+  color: #FFFFFF;
+  font-family: sans-serif;
+}
+
+main {
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin: 10vh 10vw;
+  height: 80vh;
+  width: 80vw;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-template-rows: 30% 30% 30%;
+  grid-gap: 5%;
+}
+
+.description-tab {
+  border: 1px solid grey;
+  border-radius: 5%;
+  grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.sort-tab {
+  border: 1px solid grey;
+  border-radius: 5%;
+}
