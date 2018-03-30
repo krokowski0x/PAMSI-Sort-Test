@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import styles from './styles.scss';
 
-import SortTab from './components/SortTab';
-import DescriptionTab from './components/DescriptionTab';
+import Dashboard from './components/Dashboard';
+import SortTest from './components/SortTest';
 
 import { BubbleSort } from './sorts/BubbleSort';
 import { HeapSort } from './sorts/HeapSort';
@@ -13,19 +15,15 @@ import { QuickSort } from './sorts/QuickSort';
 import { ShellSort } from './sorts/ShellSort';
 import { IntroSort } from './sorts/IntroSort';
 
-const Dashboard = () => {
+const App = () => {
   return (
-    <main>
-      <DescriptionTab />
-      <SortTab type='Bubble Sort'/>
-      <SortTab type='Insertion Sort'/>
-      <SortTab type='Heap Sort'/>
-      <SortTab type='Merge Sort'/>
-      <SortTab type='Shell Sort'/>
-      <SortTab type='Quick Sort'/>
-      <SortTab type='Introspective Sort'/>
-    </main>
+    <Router>
+      <div>
+        <Route exact path='/' component={Dashboard} />
+        <Route path='/:sortType' component={SortTest} />
+      </div>
+    </Router>
   );
 };
 
-ReactDOM.render(<Dashboard />, document.getElementById("app-container"));
+ReactDOM.render(<App />, document.getElementById("app-container"));
