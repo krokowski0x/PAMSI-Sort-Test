@@ -1,4 +1,4 @@
-$main-color: #000000;
+$main-color: #24292e;
 
 * {
   background-color: $main-color;
@@ -7,8 +7,6 @@ $main-color: #000000;
 }
 
 main {
-  border: 1px solid grey;
-  border-radius: 5px;
   margin: 10vh 10vw;
   height: 80vh;
   width: 80vw;
@@ -29,4 +27,13 @@ main {
 .sort-tab {
   border: 1px solid grey;
   border-radius: 5%;
+  h2 {
+    text-align: center;
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+  }
 }
