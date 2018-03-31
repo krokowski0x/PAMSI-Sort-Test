@@ -9,25 +9,25 @@ const Dashboard = () => {
     <main>
       <DescriptionTab />
       <Link to='bubble-sort'>
-        <SortTab type='Bubble_Sort'/>
+        <SortTab type='Bubble Sort'/>
       </Link>
       <Link to='insertion-sort'>
-        <SortTab type='Insertion_Sort'/>
+        <SortTab type='Insertion Sort'/>
       </Link>
       <Link to='heap-sort'>
-        <SortTab type='Heap_Sort'/>
+        <SortTab type='Heap Sort'/>
       </Link>
       <Link to='merge-sort'>
-        <SortTab type='Merge_Sort'/>
+        <SortTab type='Merge Sort'/>
       </Link>
       <Link to='shell-sort'>
-        <SortTab type='Shell_Sort'/>
+        <SortTab type='Shell Sort'/>
       </Link>
       <Link to='quick-sort'>
-        <SortTab type='Quick_Sort'/>
+        <SortTab type='Quick Sort'/>
       </Link>
-      <Link to='introspective-sort'>
-        <SortTab type='Introspective_Sort'/>
+      <Link to='intro-sort'>
+        <SortTab type='Intro Sort'/>
       </Link>
     </main>
   );

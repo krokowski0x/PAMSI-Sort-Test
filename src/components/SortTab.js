@@ -10,7 +10,7 @@ const sources = {
 }
 
 const SortTab = (props) => {
-  let src = props.type;
+  let src = props.type.split(' ').join('_');
   return (
     <div className='sort-tab'>
       <h2>{props.type}</h2>
