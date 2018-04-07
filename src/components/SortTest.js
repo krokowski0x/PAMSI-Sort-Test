@@ -1,44 +1,29 @@
 import React, { Component } from "react";
+import Placeholder from './Placeholder';
+import ArrayWorker from './../workers/arraysInit.worker.js';
 
 class SortTest extends Component {
   constructor(props) {
     super(props);
+    this.worker = new ArrayWorker();
+    this.worker.onmessage = (m) => console.log(m);
     this.state = {
       type: props.match.params.sortType,
-      arrays: []
+      arrays: [],
     };
   }
 
   componentDidMount() {
-    let xs = { len: 10000 };
-    let s = { len: 50000 };
-    let m = { len: 100000 };
-    let l = { len: 500000 };
-    let xl = { len: 1000000 };
-    let arrays = { xs, s, m, l, xl };
-    arrays = setup(arrays);
-    this.setState( {type: this.state.type, arrays} );
-    // const cachedArrays = localStorage.getItem('arrays');
-    // if (cachedArrays)
-    //   this.setState({ type: this.state.type, arrays: JSON.parse(cachedArrays) });
-    // else
-    //   fetch('/arrays')
-    //     .then(res => res.json())
-    //     .then(result => this.onSetResult(result, 'arrays'));
+    this.worker.postMessage('Hello');
+    //this.setState( {type: this.state.type, arrays} );
   }
 
-  // onSetResult(result, key) {
-  //   localStorage.setItem(key, JSON.stringify(result.arrays));
-  //   this.setState({ type: this.state.type, arrays: result.arrays });
-  // }
-
   render() {
-    return (
+    return this.state.arrays.length ? (
       <div className='sort-tab'>
         <h2>{this.state.type}</h2>
-        <p></p>
       </div>
-    );
+    ) : <Placeholder />
   };
 };
 
