@@ -9,3 +9,4 @@ App for testing performance of different sorting algorithms.
 * [Webpack](https://webpack.js.org/) with [Babel](https://babeljs.io/) - bundler and compiler for newest ECMAScript standard
 * [Express](https://expressjs.com/) - Web framework for [Node.js](https://nodejs.org/en/)
 * [Heroku](https://www.heroku.com/) - Cloud platform which can run Node.js
+* [Web Workers](https://www.w3schools.com/html/html5_webworkers.asp) - Browser JavaScript multi-threading
