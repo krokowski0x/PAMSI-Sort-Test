@@ -1,4 +1,6 @@
-self.onmessage = (msg) => {
+import registerPromiseWorker from 'promise-worker/register';
+
+registerPromiseWorker( msg => {
   let xs = { len: 10000 };
   let s = { len: 50000 };
   let m = { len: 100000 };
@@ -6,8 +8,8 @@ self.onmessage = (msg) => {
   let xl = { len: 1000000 };
   let arrays = { xs, s, m, l, xl };
   arrays = setup(arrays);
-  self.postMessage(arrays);
-};
+  return arrays;
+});
 
 const setup = (arrays) => {
   for (let array in arrays) {
