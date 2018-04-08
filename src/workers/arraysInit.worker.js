@@ -1,14 +1,47 @@
 import registerPromiseWorker from 'promise-worker/register';
 
+import { BubbleSort } from '../sorts/BubbleSort';
+import { HeapSort } from '../sorts/HeapSort';
+import { InsertionSort } from '../sorts/InsertionSort';
+import { MergeSort } from '../sorts/MergeSort';
+import { QuickSort } from '../sorts/QuickSort';
+import { ShellSort } from '../sorts/ShellSort';
+import { IntroSort } from '../sorts/IntroSort';
+
+let xs = { len: 10000 };
+let s = { len: 50000 };
+let m = { len: 100000 };
+let l = { len: 500000 };
+let xl = { len: 1000000 };
+let arrays = { xs, s, m, l, xl };
+let arraysReady = false;
+
 registerPromiseWorker( msg => {
-  let xs = { len: 10000 };
-  let s = { len: 50000 };
-  let m = { len: 100000 };
-  let l = { len: 500000 };
-  let xl = { len: 1000000 };
-  let arrays = { xs, s, m, l, xl };
-  arrays = setup(arrays);
-  return arrays;
+  switch (msg.work) {
+    case 'Initialize':
+      arrays = setup(arrays);
+      return arrays;
+    case 'Sort':
+      let stats = {};
+      let start, end;
+
+      if (arraysReady) {
+        for (let array in arrays) {
+          for (let field in array) {
+            start = performance.now();
+            if (typeof field === 'array')
+              field.QuickSort();
+            end = performance.now();
+            stats = `It took ${start - end} ms.`;
+          }
+        }
+        return stats;
+      } else {
+        throw new Error('Arrays were not yet initialized.');
+      }
+    default:
+      throw new Error('Unknown work type.');
+  }
 });
 
 const setup = (arrays) => {
@@ -24,5 +57,7 @@ const setup = (arrays) => {
     arrays[array]['99%'] = [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.99), ...a.concat().slice(0, arrays[array]['len']*0.01)];
     arrays[array]['99,7%'] = [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.997), ...a.concat().slice(0, arrays[array]['len']*0.003)];
   }
+
+  arraysReady = true;
   return arrays;
 }

@@ -9,24 +9,30 @@ const promiseWorker = new PromiseWorker(worker);
 class SortTest extends Component {
   constructor(props) {
     super(props);
+    this.onClick = this.handleClick.bind(this);
     this.worker = promiseWorker;
     this.state = {
-      type: props.match.params.sortType,
-      arrays: [],
+      type: props.match.params.sortType
     };
   }
 
   componentDidMount() {
-    this.worker.postMessage('Hello')
-      .then(msg => this.setState( {type: this.state.type, arrays: msg} ));
+    this.worker.postMessage({work: 'Initialize'})
+      .then(msg => console.log(msg));
+  }
+
+  handleClick(e) {
+    this.worker.postMessage({work: 'Sort'})
+      .then(msg => console.log(msg));
   }
 
   render() {
-    return Object.keys(this.state.arrays).length ? (
+    return (
       <div className='sort-tab'>
         <h2>{this.state.type}</h2>
+        <button onClick={this.onClick}>Sort!</button>
       </div>
-    ) : <Placeholder />
+    )
   };
 };
 
