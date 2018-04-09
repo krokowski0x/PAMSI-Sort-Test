@@ -23,18 +23,13 @@ registerPromiseWorker( msg => {
       return arrays;
     case 'Sort':
       let stats = {};
-      let start, end;
+      let start = 0, end = 0;
 
       if (arraysReady) {
-        for (let array in arrays) {
-          for (let field in array) {
-            start = performance.now();
-            if (typeof field === 'array')
-              field.QuickSort();
-            end = performance.now();
-            stats = `It took ${start - end} ms.`;
-          }
-        }
+        start = performance.now();
+        arrays.xl['25%'].QuickSort();
+        end = performance.now();
+        stats = `It took ${end - start} ms.`;
         return stats;
       } else {
         throw new Error('Arrays were not yet initialized.');
@@ -56,6 +51,8 @@ const setup = (arrays) => {
     arrays[array]['95%'] = [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.95), ...a.concat().slice(0, arrays[array]['len']*0.05)];
     arrays[array]['99%'] = [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.99), ...a.concat().slice(0, arrays[array]['len']*0.01)];
     arrays[array]['99,7%'] = [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.997), ...a.concat().slice(0, arrays[array]['len']*0.003)];
+
+    delete arrays[array]['len'];
   }
 
   arraysReady = true;
