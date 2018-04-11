@@ -1,6 +1,6 @@
-import { HeapSort } from './HeapSort';
-import { InsertionSort } from './InsertionSort';
-import { QuickSort } from './QuickSort';
+const { HeapSort } = require('./HeapSort');
+const { InsertionSort } = require('./InsertionSort');
+const { QuickSort } = require('./QuickSort');
 
 Array.prototype.IntroSort = function() {
   IntrospectiveSort(this, this.length, Math.floor(2*Math.log2(this.length)));
