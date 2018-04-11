@@ -3,6 +3,14 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const { BubbleSort } = require('./src/sorts/BubbleSort');
+const { HeapSort } = require('./src/sorts/HeapSort');
+const { InsertionSort } = require('./src/sorts/InsertionSort');
+const { MergeSort } = require('./src/sorts/MergeSort');
+const { QuickSort } = require('./src/sorts/QuickSort');
+const { ShellSort } = require('./src/sorts/ShellSort');
+const { IntroSort } = require('./src/sorts/IntroSort');
+
 let xs = { len: 10000 };
 let s =  { len: 50000 };
 let m =  { len: 100000 };
@@ -60,12 +68,11 @@ const runSorting = () => {
 
   if (arraysReady) {
     start = performance.now();
-    //arrays.s['rand'] = arrays.s['rand'].QuickSort();
+    arrays.m['rand'].QuickSort();
     end = performance.now();
     stats = `It took ${end - start} ms.`;
   return stats;
-} else {
-  throw new Error('You can\'t sort arrays before initializing them!');
-}
-
+  } else {
+    throw new Error('You can\'t sort arrays before initializing them!');
+  }
 }
