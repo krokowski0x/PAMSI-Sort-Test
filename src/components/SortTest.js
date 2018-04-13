@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PromiseWorker from 'promise-worker';
-import Placeholder from './Placeholder';
 import ArrayWorker from './../workers/arraysInit.worker.js';
 
 const worker = new ArrayWorker();
@@ -16,11 +15,6 @@ class SortTest extends Component {
     };
   }
 
-  componentDidMount() {
-    this.worker.postMessage({work: 'Initialize'})
-      .then(msg => console.log(msg));
-  }
-
   handleClick(e) {
     this.worker.postMessage({work: 'Sort'})
       .then(msg => console.log(msg));
@@ -28,7 +22,7 @@ class SortTest extends Component {
 
   render() {
     return (
-      <div className='sort-tab'>
+      <div className='sort-dashboard'>
         <h2>{this.state.type}</h2>
         <button onClick={this.onClick}>Sort!</button>
       </div>
