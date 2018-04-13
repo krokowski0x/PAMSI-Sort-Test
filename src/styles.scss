@@ -18,6 +18,7 @@ main {
 }
 
 .description-tab {
+  text-align: center;
   border: 2px solid grey;
   border-radius: 5%;
   overflow: hidden;
@@ -46,4 +47,35 @@ main {
     width: 100%;
     height: 200px;
   }
+}
+
+.sort-description {
+  margin: 2%;
+  padding: 2%;
+  border: 2px solid $tab-color;
+  border-radius: 10%;
+  display: grid;
+  grid-template-columns: 60% 20% 10%;
+  grid-column-gap: 5%;
+  section {
+    grid-column: 1;
+  }
+  .big-o {
+    text-align: center;
+    grid-column: 2;
+  }
+  button {
+  border: 2px solid $tab-color;
+  grid-column: 3;
+  font-weight: bold;
+  padding: 5%;
+  font-size: 200%;
+  border-radius: 5%;
+  cursor: pointer;
+  background: transparent;
+  }
+  button:hover {
+  background-color: $tab-color;
+  color: white;
+}
 }

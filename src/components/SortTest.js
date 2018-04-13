@@ -58,9 +58,11 @@ class SortTest extends Component {
     return (
 
       <div className='sort-description'>
-        <h2>{this.state.title}</h2>
-        <p>{this.state.description}</p>
-        <div>
+        <section>
+          <h2>{this.state.title}</h2>
+          <p>{this.state.description}</p>
+        </section>
+        <div className='big-o'>
           <h2>O(n)</h2>
           <h4>Best case: {this.state.best}</h4>
           <h4>Average case: {this.state.average}</h4>
