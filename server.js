@@ -17,6 +17,7 @@ let m =  { len: 100000 };
 let l =  { len: 500000 };
 let xl = { len: 1000000 };
 let arrays = { xs, s, m, l, xl };
+let stats = { xs, s, m, l, xl };
 let arraysReady = false;
 
 app.use(express.static('dist'));
@@ -62,16 +63,19 @@ const setup = (arrays) => {
 }
 
 const runSorting = () => {
-  let stats = '';
   let start = 0;
   let end = 0;
+  let time = 0;
 
   if (arraysReady) {
-    start = performance.now();
-    arrays.m['rand'].QuickSort();
-    end = performance.now();
-    stats = `It took ${end - start} ms.`;
-  return stats;
+    for (let array in arrays) {
+        start = performance.now();
+        arrays[array]['rand'].QuickSort();
+        end = performance.now();
+        time = end - start;
+        stats[array] = `It took ${time.toFixed(3)} ms.`;
+    }
+    return stats;
   } else {
     throw new Error('You can\'t sort arrays before initializing them!');
   }
