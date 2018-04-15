@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PromiseWorker from 'promise-worker';
+import { Line } from 'react-chartjs-2';
 import ArrayWorker from './../workers/arraysInit.worker.js';
 
 const worker = new ArrayWorker();
@@ -48,15 +49,44 @@ class SortTest extends Component {
         else
           average = 'O' + average[0].match(/\(.*?\)/g)[0].replace(/\'\'/g,'');
       }
-       console.log(best,worst,average);
        this.setState({average, best, worst})
     })
     .catch(err => console.log(err));
   }
 
   render() {
+    let sizes = [10000,50000,100000,500000,1000000];
+    let on = [10000,50000,100000,500000,1000000];
+    let logn = [Math.log10(10000),Math.log10(50000),Math.log10(100000),Math.log10(500000),Math.log10(1000000)];
+    let data = {
+        labels: sizes,
+        datasets: [
+          {
+          label: 'O(log n)',
+          borderColor: 'rgba(255,99,132,1)',
+          data: logn
+        }, {
+          label: 'O(n)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          data: on
+        }]
+    };
+    let opts = {
+        scales: {
+            yAxes: [{
+                type: 'linear',
+                ticks: {
+                    beginAtZero:true
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
     return (
-
       <div className='sort-description'>
         <section>
           <h2>{this.state.title}</h2>
@@ -69,6 +99,7 @@ class SortTest extends Component {
           <h4>Worst case: {this.state.worst}</h4>
         </div>
         <button>Sort!</button>
+        <Line data={data} options={opts} />
       </div>
     );
   };
