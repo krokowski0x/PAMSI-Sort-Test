@@ -5,6 +5,7 @@ App for testing performance of different sorting algorithms.
 ## Built With
 
 * [React](https://reactjs.org/) - king of all JS frameworks with [React Router](https://reacttraining.com/react-router/) for routing
+* [Chart.js](https://www.chartjs.org/) - Most popular canvas-based charting library for JS
 * [Sass](https://sass-lang.com/) - most popular CSS preprocessor
 * [Webpack](https://webpack.js.org/) with [Babel](https://babeljs.io/) - bundler and compiler for newest ECMAScript standard
 * [Express](https://expressjs.com/) - Web framework for [Node.js](https://nodejs.org/en/)
