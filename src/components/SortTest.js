@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PromiseWorker from 'promise-worker';
-import { Line } from 'react-chartjs-2';
 import ArrayWorker from './../workers/arraysInit.worker.js';
+import ChartTooltip from './ChartTooltip';
 
 const worker = new ArrayWorker();
 const promiseWorker = new PromiseWorker(worker);
@@ -43,61 +43,34 @@ class SortTest extends Component {
 
     // Had to break regex into few parts, becouse of inconsistent styling on Wikipedia
     if (worst !== 'Unknown')
-      worst = 'O' + worst[0].match(/\(.*?\)/g)[0].replace(/\'\'s*/g,'');
+      worst = 'O' + worst[0]
+      .match(/\(.*?\)/g)[0]
+      .replace(/\'\'\s*|<\/sup>/g,'')
+      .replace(/<sup>/g,'^')
+      .replace(/\\/g,'');  // Don't know better workaround yet
     if (best !== 'Unknown')
-      best = 'O' + best[0].match(/\(.*?\)/g)[0].replace(/\'\'s*/g,'');
+      best = 'O' + best[0]
+      .match(/\(.*?\)/g)[0]
+      .replace(/\'\'\s*|<\/sup>/g,'')
+      .replace(/<sup>/g,'^')
+      .replace(/\\/g,'');
     if (average !== 'Unknown') {
-      // In Shellsort it was so badly formatted, that I had to have ths assertion
+      // Shellsort was so badly formatted, that I had to have ths assertion
       if (this.state.type === 'Shellsort')
         average = 'Unknown';
       else
-        average = 'O' + average[0].match(/\(.*?\)/g)[0].replace(/\'\'/g,'');
+        average = 'O' + average[0]
+        .match(/\(.*?\)/g)[0]
+        .replace(/\'\'\s*|<\/sup>/g,'')
+        .replace(/<sup>/g,'^')
+        .replace(/\\/g,'');
     }
      this.setState({average, best, worst});
   }
 
   render() {
-    const sizes = [...Array(100).keys()];
-    const on = sizes;
-    const logn = on.map(x => Math.log10(x));
-    const nlogn = on.map(x => x*Math.log10(x));
-    const n2 = on.map(x => x**2);
-    const data = {
-        labels: sizes,
-        datasets: [
-          {
-          label: 'O(log n)',
-          borderColor: 'rgba(255,99,132,1)',
-          data: logn
-        }, {
-          label: 'O(n)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          data: on
-        },{
-        label: 'O(log n)',
-        borderColor: 'rgba(99,255,132,1)',
-        data: nlogn
-      }, {
-        label: 'O(n)',
-        borderColor: 'rgba(245, 245, 100, 1)',
-        data: n2
-      }]
-    };
-    const opts = {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
     return (
+      <div>
       <div className='sort-description'>
         <section>
           <h2>{this.state.title}</h2>
@@ -105,12 +78,15 @@ class SortTest extends Component {
         </section>
         <div className='big-o'>
           <h2>O(n)</h2>
-          <h4>Best case: {this.state.best}</h4>
-          <h4>Average case: {this.state.average}</h4>
-          <h4>Worst case: {this.state.worst}</h4>
+          <h4 data-tip data-for='best'>Best case: {this.state.best}</h4>
+          <h4 data-tip data-for='average'>Average case: {this.state.average}</h4>
+          <h4 data-tip data-for='worst'>Worst case: {this.state.worst}</h4>
         </div>
         <button>Sort!</button>
-        <Line data={data} options={opts} />
+        </div>
+        <ChartTooltip id={'best'} type={this.state.best}/>
+        <ChartTooltip id={'average'} type={this.state.average}/>
+        <ChartTooltip id={'worst'} type={this.state.worst}/>
       </div>
     );
   };
