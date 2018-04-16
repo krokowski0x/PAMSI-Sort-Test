@@ -7,8 +7,8 @@ import ArrayWorker from './../workers/arraysInit.worker.js';
 import SortTab from './SortTab';
 import DescriptionTab from './DescriptionTab';
 
-const worker = new ArrayWorker();
-const promiseWorker = new PromiseWorker(worker);
+let worker = new ArrayWorker();
+let promiseWorker = new PromiseWorker(worker);
 
 class Dashboard extends Component {
   constructor(props) {
@@ -25,40 +25,40 @@ class Dashboard extends Component {
   }
 
   render() {
-    //if (this.state.arraysReady)
+    if (this.state.arraysReady)
       return (
         <main>
           <DescriptionTab />
           <Link to='Bubble_sort'>
-            <SortTab type='Bubble Sort'/>
+            <SortTab type='Bubble Sort' worker={this.promiseWorker}/>
           </Link>
           <Link to='Insertion_sort'>
-            <SortTab type='Insertion Sort'/>
+            <SortTab type='Insertion Sort' worker={this.promiseWorker}/>
           </Link>
           <Link to='Heapsort'>
-            <SortTab type='Heap Sort'/>
+            <SortTab type='Heap Sort' worker={this.promiseWorker}/>
           </Link>
           <Link to='Merge_sort'>
-            <SortTab type='Merge Sort'/>
+            <SortTab type='Merge Sort' worker={this.promiseWorker}/>
           </Link>
           <Link to='Shellsort'>
-            <SortTab type='Shell Sort'/>
+            <SortTab type='Shell Sort' worker={this.promiseWorker}/>
           </Link>
           <Link to='Quicksort'>
-            <SortTab type='Quick Sort'/>
+            <SortTab type='Quick Sort' worker={this.promiseWorker}/>
           </Link>
           <Link to='Introsort'>
-            <SortTab type='Intro Sort'/>
+            <SortTab type='Intro Sort' worker={this.promiseWorker}/>
           </Link>
         </main>
       );
-    // else
-    //   return (
-    //   <main>
-    //     <DescriptionTab />
-    //     <Placeholder />
-    //   </main>
-    // );
+    else
+      return (
+      <main>
+        <DescriptionTab />
+        <Placeholder />
+      </main>
+    );
   }
 };
 

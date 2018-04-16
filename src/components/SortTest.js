@@ -11,8 +11,10 @@ class SortTest extends Component {
     super(props);
     this.worker = promiseWorker;
     this.state = {
-      type: props.match.params.sortType
+      type: props.match.params.sortType,
+      worker: props.worker
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +70,11 @@ class SortTest extends Component {
      this.setState({average, best, worst});
   }
 
+  handleClick(e) {
+    this.worker.postMessage({work: 'Sort'})
+      .then(stats => this.setState( {stats} ));
+  }
+
   render() {
     return (
       <div>
@@ -82,7 +89,7 @@ class SortTest extends Component {
           <h4 data-tip data-for='average'>Average case: {this.state.average}</h4>
           <h4 data-tip data-for='worst'>Worst case: {this.state.worst}</h4>
         </div>
-        <button>Sort!</button>
+        <button onClick={this.handleClick}>Sort!</button>
         </div>
         <ChartTooltip id={'best'} type={this.state.best}/>
         <ChartTooltip id={'average'} type={this.state.average}/>
