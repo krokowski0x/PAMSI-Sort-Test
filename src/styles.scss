@@ -1,10 +1,16 @@
 $bg-color: #24292e;
-$tab-color: #454955;
+$tab-color: #41444c;
 
 * {
   background-color: $bg-color;
   color: #FFFFFF;
   font-family: sans-serif;
+  font-weight: bold;
+  line-height: 150%;
+}
+
+canvas {
+  width: 500px !important;
 }
 
 main {
@@ -50,19 +56,34 @@ main {
 }
 
 .sort-description {
-  margin: 2%;
+  margin-bottom: 5%;
   padding: 2%;
-  border: 2px solid $tab-color;
-  border-radius: 10%;
   display: grid;
-  grid-template-columns: 60% 20% 10%;
-  grid-column-gap: 5%;
+  grid-template-columns: 70% 16% 10%;
+  grid-column-gap: 2%;
   section {
+    border: 2px solid $tab-color;
+    padding: 1% 2%;
     grid-column: 1;
   }
   .big-o {
     text-align: center;
     grid-column: 2;
+    h4 {
+      cursor: pointer;
+      padding: 5%;
+      margin: 0;
+      border: 2px solid $tab-color;
+    }
+    :nth-child(2) {
+      background-color: rgba(99,255,132,1);
+    }
+    :nth-child(3) {
+      background-color: rgba(54, 162, 235, 1);
+    }
+    :nth-child(4) {
+      background-color: rgba(255,99,132,1);
+    }
   }
   button {
   border: 2px solid $tab-color;
@@ -77,5 +98,5 @@ main {
   button:hover {
   background-color: $tab-color;
   color: white;
-}
+  }
 }
