@@ -5,13 +5,13 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const { BubbleSort } = require('./src/sorts/BubbleSort');
-const { HeapSort } = require('./src/sorts/HeapSort');
-const { InsertionSort } = require('./src/sorts/InsertionSort');
-const { MergeSort } = require('./src/sorts/MergeSort');
-const { QuickSort } = require('./src/sorts/QuickSort');
-const { ShellSort } = require('./src/sorts/ShellSort');
-const { IntroSort } = require('./src/sorts/IntroSort');
+const { BubbleSort } = require('../src/sorts/BubbleSort');
+const { HeapSort } = require('../src/sorts/HeapSort');
+const { InsertionSort } = require('../src/sorts/InsertionSort');
+const { MergeSort } = require('../src/sorts/MergeSort');
+const { QuickSort } = require('../src/sorts/QuickSort');
+const { ShellSort } = require('../src/sorts/ShellSort');
+const { IntroSort } = require('../src/sorts/IntroSort');
 
 let xs = { len: 10000 };
 let s =  { len: 50000 };
@@ -22,7 +22,7 @@ let arrays = { xs, s, m, l, xl };
 let stats = {'xs': {}, 's': {}, 'm': {}, 'l': {}, 'xl': {}};
 let arraysReady = false;
 
-app.use(express.static('dist'));
+app.use(express.static('./../dist'));
 
 app.get('/arraysInit', (request, response) => {
   try {
@@ -37,6 +37,7 @@ app.get('/stats/:sortType', (request, response) => {
   try {
     const type = request.params.sortType;
     // Here we should have 8 independent workers
+    console.log('Starting the sort!');
     runSorting('rand', type);
     runSorting('25%', type);
     runSorting('50%', type);
@@ -85,7 +86,7 @@ const runSorting = (field, sortType) => {
       arrays[array][field][sortType]();
       end = performance.now();
       time = end - start;
-      stats[array][field] = `It took ${time.toFixed(3)} ms.`;
+      stats[array][field] = time.toFixed(3);
     }
     console.log('Done!');
     return stats;
