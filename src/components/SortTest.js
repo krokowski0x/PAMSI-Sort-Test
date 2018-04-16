@@ -20,45 +20,49 @@ class SortTest extends Component {
     fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&origin=*&titles=${this.state.type}`)
     .then(res => res.json())
     .then(data => {
-      let pageID = Object.keys(data.query.pages)[0];
-      let info = data.query.pages[pageID];
-      this.setState({title: info.title, description: info.extract, type: this.state.type});
+      const pageID = Object.keys(data.query.pages)[0];
+      const info = data.query.pages[pageID];
+      this.setState({title: info.title, description: info.extract});
     })
     .catch(err => console.log(err));
 
     // Independent Infobox fetch
     fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=${this.state.type}&rvsection=0&origin=*`)
     .then(res => res.json())
-    .then(data => {
-      let pageID = Object.keys(data.query.pages)[0];
-      let info = data.query.pages[pageID].revisions[0]['*'];
-
-      let worst = info.match(/time\s*=\s*.*/g) || 'Unknown';
-      let best = info.match(/best-time\s*=\s*.*/g) || 'Unknown';
-      let average = info.match(/average-time\s*=\s*.*/g) || 'Unknown';
-
-      // Had to break regex into few parts, becouse of inconsistent styling on Wikipedia
-      if (worst !== 'Unknown')
-        worst = 'O' + worst[0].match(/\(.*?\)/g)[0].replace(/\'\'s*/g,'');
-      if (best !== 'Unknown')
-        best = 'O' + best[0].match(/\(.*?\)/g)[0].replace(/\'\'s*/g,'');
-      if (average !== 'Unknown') {
-        // In Shellsort it was so badly formatted, that I had to have ths assertion
-        if (this.state.type === 'Shellsort')
-          average = 'Unknown';
-        else
-          average = 'O' + average[0].match(/\(.*?\)/g)[0].replace(/\'\'/g,'');
-      }
-       this.setState({average, best, worst})
-    })
+    .then(data => this.parseInfobox(data))
     .catch(err => console.log(err));
   }
 
+  parseInfobox(data) {
+    const pageID = Object.keys(data.query.pages)[0];
+    const info = data.query.pages[pageID].revisions[0]['*'];
+
+    let worst = info.match(/time\s*=\s*.*/g) || 'Unknown';
+    let best = info.match(/best-time\s*=\s*.*/g) || 'Unknown';
+    let average = info.match(/average-time\s*=\s*.*/g) || 'Unknown';
+
+    // Had to break regex into few parts, becouse of inconsistent styling on Wikipedia
+    if (worst !== 'Unknown')
+      worst = 'O' + worst[0].match(/\(.*?\)/g)[0].replace(/\'\'s*/g,'');
+    if (best !== 'Unknown')
+      best = 'O' + best[0].match(/\(.*?\)/g)[0].replace(/\'\'s*/g,'');
+    if (average !== 'Unknown') {
+      // In Shellsort it was so badly formatted, that I had to have ths assertion
+      if (this.state.type === 'Shellsort')
+        average = 'Unknown';
+      else
+        average = 'O' + average[0].match(/\(.*?\)/g)[0].replace(/\'\'/g,'');
+    }
+     this.setState({average, best, worst});
+  }
+
   render() {
-    let sizes = [10000,50000,100000,500000,1000000];
-    let on = [10000,50000,100000,500000,1000000];
-    let logn = [Math.log10(10000),Math.log10(50000),Math.log10(100000),Math.log10(500000),Math.log10(1000000)];
-    let data = {
+    const sizes = [...Array(100).keys()];
+    const on = sizes;
+    const logn = on.map(x => Math.log10(x));
+    const nlogn = on.map(x => x*Math.log10(x));
+    const n2 = on.map(x => x**2);
+    const data = {
         labels: sizes,
         datasets: [
           {
@@ -69,12 +73,19 @@ class SortTest extends Component {
           label: 'O(n)',
           borderColor: 'rgba(54, 162, 235, 1)',
           data: on
-        }]
+        },{
+        label: 'O(log n)',
+        borderColor: 'rgba(99,255,132,1)',
+        data: nlogn
+      }, {
+        label: 'O(n)',
+        borderColor: 'rgba(245, 245, 100, 1)',
+        data: n2
+      }]
     };
-    let opts = {
+    const opts = {
         scales: {
             yAxes: [{
-                type: 'linear',
                 ticks: {
                     beginAtZero:true
                 }
