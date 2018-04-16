@@ -36,6 +36,7 @@ app.get('/arraysInit', (request, response) => {
 app.get('/stats/:sortType', (request, response) => {
   try {
     const type = request.params.sortType;
+    // Here we should have 8 independent workers
     runSorting('rand', type);
     runSorting('25%', type);
     runSorting('50%', type);
@@ -84,9 +85,9 @@ const runSorting = (field, sortType) => {
       arrays[array][field][sortType]();
       end = performance.now();
       time = end - start;
-      console.log(time);
       stats[array][field] = `It took ${time.toFixed(3)} ms.`;
     }
+    console.log('Done!');
     return stats;
   } else {
     throw new Error('You can\'t sort arrays before initializing them!');
