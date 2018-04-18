@@ -1,12 +1,13 @@
 import React from "react";
-
+const source = 'https://assets.toptal.io/assets/front/static/public/blocks/sorting_algorithms/animations/50/random-initial-order/';
 const sources = {
-  Bubble_Sort: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Bubble_sort_animation.gif/240px-Bubble_sort_animation.gif',
-  Insertion_Sort: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Insertion_sort_animation.gif/240px-Insertion_sort_animation.gif',
-  Heap_Sort: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Sorting_heapsort_anim.gif',
-  Quick_Sort: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Sorting_quicksort_anim.gif/240px-Sorting_quicksort_anim.gif',
-  Merge_Sort: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Merge_sort_animation2.gif/240px-Merge_sort_animation2.gif',
-  Shell_Sort: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Sorting_shellsort_anim.gif/240px-Sorting_shellsort_anim.gif'
+  Bubble_Sort: `${source}bubble-sort_ee720b.gif`,
+  Insertion_Sort: `${source}insertion-sort_da381c.gif`,
+  Heap_Sort: `${source}heap-sort_f79bb1.gif`,
+  Quick_Sort: `${source}quick-sort_b49af5.gif`,
+  Merge_Sort: `${source}merge-sort_8993d8.gif`,
+  Shell_Sort: `${source}shell-sort_5c15b3.gif`,
+  Intro_Sort: `${source}quick-sort-3-way_d176ee.gif`
 }
 
 const SortTab = (props) => {
