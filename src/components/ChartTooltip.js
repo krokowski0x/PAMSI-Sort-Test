@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import ReactTooltip from 'react-tooltip';
 
 const ChartTooltip = (props) => {
-  const sizes = [...Array(50).keys()];
+  const sizes = [...Array(100).keys()];
   const chartTypes = {
     'O(n)': sizes,
     'O(log n)': sizes.map(x => Math.log10(x)),
@@ -20,6 +20,9 @@ const ChartTooltip = (props) => {
   };
   const opts = {
     maintainAspectRatio: false,
+    tooltips: {
+      enabled: false
+    },
       scales: {
           yAxes: [{
               ticks: {
@@ -36,11 +39,11 @@ const ChartTooltip = (props) => {
       }
   }
   return (
-    <ReactTooltip id={props.id} place="bottom">
+    <ReactTooltip id={props.id} place="left" effect="float">
      <Line data={data}
            options={opts}
-           width={500}
-           height={500}
+           width={200}
+           height={200}
       />
     </ReactTooltip>
   );

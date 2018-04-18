@@ -101,7 +101,13 @@ class SortTest extends Component {
         <ChartTooltip id={'best'} type={this.state.best} />
         <ChartTooltip id={'average'} type={this.state.average} />
         <ChartTooltip id={'worst'} type={this.state.worst} />
-        <DataCharts title={this.state.title} stats={this.state.statistics} />
+        <DataCharts
+          title={this.state.title}
+          stats={this.state.statistics}
+          best={this.state.best}
+          average={this.state.average}
+          worst={this.state.worst}
+        />
       </div>
     );
   };
