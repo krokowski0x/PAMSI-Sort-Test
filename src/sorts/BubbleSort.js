@@ -1,14 +1,10 @@
 Array.prototype.BubbleSort = function() {
-  let swapped;
-  do {
-    swapped = false;
-    for (let i = 0; i < this.length; i++) {
-      if (this[i] && this[i + 1] && this[i] > this[i + 1]) {
-        swap(this, i, i + 1);
-        swapped = true;
-      }
+  for (let i = this.length - 1; i >= 0; i--) {
+    for (let j = this.length - i; j >= 0; j--) {
+      if (this[j] < this[j-1])
+        swap(this, j, j-1);
     }
-  } while(swapped);
+  }
   return this;
 }
 

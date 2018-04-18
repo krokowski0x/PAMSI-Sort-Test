@@ -1,14 +1,13 @@
 Array.prototype.HeapSort = function() {
-  let N = this.length-1;
-  let array = this;
+  let N = this.length;
    // Build heap (rearrange array)
-    for (let i = N / 2 ; i >= 0; i--)
-        heapify(array, N, i);
+    for (let i = N / 2 - 1; i >= 0; i--)
+        heapify(this, N, i);
 
     // One by one extract an element from heap
-    for (let i = N; i >= 0; i--) {
-        swap(array, 0, i);
-        heapify(array, i, 0);
+    for (let i = N-1; i >= 0; i--) {
+        swap(this, 0, i);
+        heapify(this, i, 0);
     }
 
   return this;
