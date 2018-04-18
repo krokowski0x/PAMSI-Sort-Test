@@ -19,7 +19,7 @@ let m =  { len: 100000 };
 let l =  { len: 500000 };
 let xl = { len: 1000000 };
 let arrays = { xs, s, m, l, xl };
-let stats = {'xs': {}, 's': {}, 'm': {}, 'l': {}, 'xl': {}};
+let stats = {'rand': {}, '25%': {}, '50%': {}, '75%': {}, '95%': {}, '99%': {}, '99,7%': {}, 'reverse': {}};
 let arraysReady = false;
 
 app.use(express.static('./../dist'));
@@ -37,7 +37,6 @@ app.get('/stats/:sortType', (request, response) => {
   try {
     const type = request.params.sortType;
     // Here we should have 8 independent workers
-    console.log('Starting the sort!');
     runSorting('rand', type);
     runSorting('25%', type);
     runSorting('50%', type);
@@ -86,9 +85,8 @@ const runSorting = (field, sortType) => {
       arrays[array][field][sortType]();
       end = performance.now();
       time = end - start;
-      stats[array][field] = time.toFixed(3);
+      stats[field][array] = time.toFixed(3);
     }
-    console.log('Done!');
     return stats;
   } else {
     throw new Error('You can\'t sort arrays before initializing them!');
