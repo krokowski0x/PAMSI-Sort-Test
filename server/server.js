@@ -22,7 +22,7 @@ let arrays = { xs, s, m, l, xl };
 let stats = {'rand': {}, '25%': {}, '50%': {}, '75%': {}, '95%': {}, '99%': {}, '99,7%': {}, 'reverse': {}};
 let arraysReady = false;
 
-app.use(express.static('./../dist'));
+app.use(express.static('dist'));
 
 app.get('/arraysInit', (request, response) => {
   try {
@@ -36,7 +36,7 @@ app.get('/arraysInit', (request, response) => {
 app.get('/stats/:sortType', (request, response) => {
   try {
     const type = request.params.sortType;
-    // Here we should have 8 independent workers
+    
     runSorting('rand', type);
     runSorting('25%', type);
     runSorting('50%', type);

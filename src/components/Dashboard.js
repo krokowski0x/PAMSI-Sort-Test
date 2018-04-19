@@ -20,8 +20,8 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.worker.postMessage({work: 'Initialize'})
-      .then(msg => this.setState( {arraysReady: true} ));
+    fetch('/arraysInit')
+    .then(msg => this.setState( {arraysReady: true} ));
   }
 
   render() {
@@ -29,25 +29,25 @@ class Dashboard extends Component {
       return (
         <main>
           <DescriptionTab />
-          <Link to='Bubble_sort'>
+          <Link to='BubbleSort'>
             <SortTab type='Bubble Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='Insertion_sort'>
+          <Link to='InsertionSort'>
             <SortTab type='Insertion Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='Heapsort'>
+          <Link to='HeapSort'>
             <SortTab type='Heap Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='Merge_sort'>
+          <Link to='MergeSort'>
             <SortTab type='Merge Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='Shellsort'>
+          <Link to='ShellSort'>
             <SortTab type='Shell Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='Quicksort'>
+          <Link to='QuickSort'>
             <SortTab type='Quick Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='Introsort'>
+          <Link to='IntroSort'>
             <SortTab type='Intro Sort' worker={this.promiseWorker}/>
           </Link>
         </main>
