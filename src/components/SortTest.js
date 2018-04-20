@@ -21,7 +21,7 @@ class SortTest extends Component {
 
   componentDidMount() {
     // Short summary and title fetch
-    fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&origin=*&titles=${this.state.type}`)
+    fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&origin=*&titles=${this.state.type.replace('So',' so')}`)
     .then(res => res.json())
     .then(data => {
       const pageID = Object.keys(data.query.pages)[0];
@@ -31,7 +31,7 @@ class SortTest extends Component {
     .catch(err => console.log(err));
 
     // Independent Infobox fetch
-    fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=${this.state.type}&rvsection=0&origin=*`)
+    fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=${this.state.type.replace('So',' so')}&rvsection=0&origin=*`)
     .then(res => res.json())
     .then(data => this.parseInfobox(data))
     .catch(err => console.log(err));
@@ -73,7 +73,8 @@ class SortTest extends Component {
   }
 
   handleClick(e) {
-    this.worker.postMessage({work: 'Sort'})
+    fetch(`/stats/${this.state.type}`)
+    .then(result => result.json())
     .then(stats => {
       let statistics = {};
       for (let field in stats)
