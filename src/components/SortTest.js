@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PromiseWorker from 'promise-worker';
 import { Line } from 'react-chartjs-2';
-import ArrayWorker from './../workers/arraysInit.worker.js';
+import ArrayWorker from './../mocks/EndpointsMock.worker.js';
 import ChartTooltip from './ChartTooltip';
 import DataCharts from './DataCharts';
 
@@ -21,7 +21,7 @@ class SortTest extends Component {
 
   componentDidMount() {
     // Short summary and title fetch
-    fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&origin=*&titles=${this.state.type.replace('So',' so')}`)
+    fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&origin=*&titles=${this.state.type}`)
     .then(res => res.json())
     .then(data => {
       const pageID = Object.keys(data.query.pages)[0];
@@ -31,7 +31,7 @@ class SortTest extends Component {
     .catch(err => console.log(err));
 
     // Independent Infobox fetch
-    fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=${this.state.type.replace('So',' so')}&rvsection=0&origin=*`)
+    fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=${this.state.type}&rvsection=0&origin=*`)
     .then(res => res.json())
     .then(data => this.parseInfobox(data))
     .catch(err => console.log(err));
@@ -73,7 +73,7 @@ class SortTest extends Component {
   }
 
   handleClick(e) {
-    fetch(`/stats/${this.state.type}`)
+    fetch(`/stats/${this.state.type.replace('_','')}`)
     .then(result => result.json())
     .then(stats => {
       let statistics = {};

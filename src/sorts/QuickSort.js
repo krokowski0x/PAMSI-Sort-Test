@@ -1,13 +1,13 @@
-Array.prototype.QuickSort = function(left = 0, right = this.length - 1) {
+Array.prototype.Quicksort = function(left = 0, right = this.length - 1) {
   let partitionIndex;
 
   if(this.length > 1) {
     partitionIndex = partition(this, left, right);
 
     if (left < partitionIndex - 1)
-      this.QuickSort(left, partitionIndex - 1);
+      this.Quicksort(left, partitionIndex - 1);
     if (partitionIndex < right)
-      this.QuickSort(partitionIndex, right);
+      this.Quicksort(partitionIndex, right);
   }
   return this;
 }

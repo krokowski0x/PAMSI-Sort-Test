@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PromiseWorker from 'promise-worker';
 
 import Placeholder from './Placeholder';
-import ArrayWorker from './../workers/arraysInit.worker.js';
+import ArrayWorker from './../mocks/EndpointsMock.worker.js';
 import SortTab from './SortTab';
 import DescriptionTab from './DescriptionTab';
 
@@ -29,25 +29,25 @@ class Dashboard extends Component {
       return (
         <main>
           <DescriptionTab />
-          <Link to='BubbleSort'>
+          <Link to='Bubble_sort'>
             <SortTab type='Bubble Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='InsertionSort'>
+          <Link to='Insertion_sort'>
             <SortTab type='Insertion Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='HeapSort'>
+          <Link to='Heapsort'>
             <SortTab type='Heap Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='MergeSort'>
+          <Link to='Merge_sort'>
             <SortTab type='Merge Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='ShellSort'>
+          <Link to='Shellsort'>
             <SortTab type='Shell Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='QuickSort'>
+          <Link to='Quicksort'>
             <SortTab type='Quick Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='IntroSort'>
+          <Link to='Introsort'>
             <SortTab type='Intro Sort' worker={this.promiseWorker}/>
           </Link>
         </main>

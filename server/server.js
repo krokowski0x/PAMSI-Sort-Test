@@ -5,13 +5,13 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const { BubbleSort } = require('../src/sorts/BubbleSort');
-const { HeapSort } = require('../src/sorts/HeapSort');
-const { InsertionSort } = require('../src/sorts/InsertionSort');
-const { MergeSort } = require('../src/sorts/MergeSort');
-const { QuickSort } = require('../src/sorts/QuickSort');
-const { ShellSort } = require('../src/sorts/ShellSort');
-const { IntroSort } = require('../src/sorts/IntroSort');
+const { Bubblesort } = require('../src/sorts/BubbleSort');
+const { Heapsort } = require('../src/sorts/HeapSort');
+const { Insertionsort } = require('../src/sorts/InsertionSort');
+const { Mergesort } = require('../src/sorts/MergeSort');
+const { Quicksort } = require('../src/sorts/QuickSort');
+const { Shellsort } = require('../src/sorts/ShellSort');
+const { Introsort } = require('../src/sorts/IntroSort');
 
 let xs = { len: 10000 };
 let s =  { len: 50000 };
@@ -36,7 +36,7 @@ app.get('/arraysInit', (request, response) => {
 app.get('/stats/:sortType', (request, response) => {
   try {
     const type = request.params.sortType;
-    
+
     runSorting('rand', type);
     runSorting('25%', type);
     runSorting('50%', type);

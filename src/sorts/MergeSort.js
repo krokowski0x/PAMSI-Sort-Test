@@ -1,4 +1,4 @@
-Array.prototype.MergeSort = function() {
+Array.prototype.Mergesort = function() {
     if (this.length < 2) {
       return this;
     }
@@ -7,7 +7,7 @@ Array.prototype.MergeSort = function() {
     const left = this.slice(0, middle);
     const right = this.slice(middle);
 
-    return merge(left.MergeSort(),right.MergeSort());
+    return merge(left.Mergesort(),right.Mergesort());
   }
 
   function merge (left, right) {

@@ -1,4 +1,4 @@
-Array.prototype.InsertionSort = function() {
+Array.prototype.Insertionsort = function() {
   let temp;
   let j;
 

@@ -1,4 +1,4 @@
-Array.prototype.HeapSort = function() {
+Array.prototype.Heapsort = function() {
   let N = this.length;
    // Build heap (rearrange array)
     for (let i = N / 2 - 1; i >= 0; i--)

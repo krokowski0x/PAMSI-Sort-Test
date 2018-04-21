@@ -1,4 +1,4 @@
-Array.prototype.ShellSort = function() {
+Array.prototype.Shellsort = function() {
   let N = this.length;
   let j;
 
