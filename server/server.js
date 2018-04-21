@@ -1,6 +1,4 @@
 const { performance } = require('perf_hooks');
-const { CPUs } = require('os').cpus().length;
-const cluster = require('cluster');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -36,15 +34,17 @@ app.get('/arraysInit', (request, response) => {
 app.get('/stats/:sortType', (request, response) => {
   try {
     const type = request.params.sortType;
-
-    runSorting('rand', type);
-    runSorting('25%', type);
-    runSorting('50%', type);
-    runSorting('75%', type);
-    runSorting('95%', type);
-    runSorting('99%', type);
-    runSorting('99,7%', type);
-    runSorting('reverse', type);
+    //arrays = setup(arrays);
+    for (let field in stats)
+      runSorting(field, type);
+    // runSorting('rand', type);
+    // runSorting('25%', type);
+    // runSorting('50%', type);
+    // runSorting('75%', type);
+    // runSorting('95%', type);
+    // runSorting('99%', type);
+    // runSorting('99,7%', type);
+    // runSorting('reverse', type);
     response.status(200).send(stats);
   } catch (err) {
     response.status(400).send(err);
@@ -67,7 +67,7 @@ const setup = (arrays) => {
     arrays[array]['99%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.99),  ...a.concat().slice(0, arrays[array]['len']*0.01)];
     arrays[array]['99,7%'] = [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.997), ...a.concat().slice(0, arrays[array]['len']*0.003)];
 
-    delete arrays[array]['len'];
+    //delete arrays[array]['len'];
   }
 
   arraysReady = true;
