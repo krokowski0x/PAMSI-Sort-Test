@@ -16,13 +16,13 @@ function DataCharts(props) {
       scales: {
           yAxes: [{
               ticks: {
-                max: 5000,
+                max: props.stats ? props.stats['reverse']['xl'] : 5000,
                 beginAtZero: true
               }
           }],
           xAxes: [{
               ticks: {
-                  beginAtZero: true
+                  min: 50
               }
           }]
       }
