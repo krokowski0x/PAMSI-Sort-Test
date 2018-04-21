@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PromiseWorker from 'promise-worker';
 import { Line } from 'react-chartjs-2';
+import { Link } from 'react-router-dom';
 import ArrayWorker from './../mocks/EndpointsMock.worker.js';
 import ChartTooltip from './ChartTooltip';
 import DataCharts from './DataCharts';
@@ -14,7 +15,8 @@ class SortTest extends Component {
     this.worker = promiseWorker;
     this.state = {
       type: props.match.params.sortType,
-      worker: props.worker
+      worker: props.worker,
+      requestedSort: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -73,42 +75,51 @@ class SortTest extends Component {
   }
 
   handleClick(e) {
-    fetch(`/stats/${this.state.type.replace('_','')}`)
-    .then(result => result.json())
-    .then(stats => {
-      let statistics = {};
-      for (let field in stats)
-        statistics[field] = Object.values(stats[field]).map(x => parseInt(x));
-      this.setState({statistics});
-    });
+    if (!this.state.statistics)
+      this.setState({requestedSort: true});
+      fetch(`/stats/${this.state.type.replace('_','')}`)
+      .then(result => result.json())
+      .then(stats => {
+        let statistics = {};
+        for (let field in stats)
+          statistics[field] = Object.values(stats[field]).map(x => parseInt(x));
+        this.setState({statistics});
+      });
   }
 
   render() {
+  const { title, description, best, average, worst, statistics, requestedSort } = this.state;
+  const chart = requestedSort ?
+  <DataCharts
+    requestedSort={requestedSort}
+    title={title}
+    stats={statistics}
+    best={best}
+    average={average}
+    worst={worst}
+  /> :
+  <div></div>
+
     return (
       <div>
         <div className='sort-description'>
+          <Link to='/'>↶</Link>
           <section>
-            <h2>{this.state.title}</h2>
-            <p>{this.state.description}</p>
+            <h2>{title}</h2>
+            <p>{description}</p>
           </section>
           <div className='big-o'>
             <h2>O(n)</h2>
-            <h4 data-tip data-for='best'>Best case: {this.state.best}</h4>
-            <h4 data-tip data-for='average'>Average case: {this.state.average}</h4>
-            <h4 data-tip data-for='worst'>Worst case: {this.state.worst}</h4>
+            <h4 data-tip data-for='best'>Best case: {best}</h4>
+            <h4 data-tip data-for='average'>Average case: {average}</h4>
+            <h4 data-tip data-for='worst'>Worst case: {worst}</h4>
           </div>
-          <button onClick={this.handleClick}>Sort!</button>
+        <button onClick={this.handleClick}>Sort!</button>
+        <ChartTooltip id={'best'} type={best} />
+        <ChartTooltip id={'average'} type={average} />
+        <ChartTooltip id={'worst'} type={worst} />
         </div>
-        <ChartTooltip id={'best'} type={this.state.best} />
-        <ChartTooltip id={'average'} type={this.state.average} />
-        <ChartTooltip id={'worst'} type={this.state.worst} />
-        <DataCharts
-          title={this.state.title}
-          stats={this.state.statistics}
-          best={this.state.best}
-          average={this.state.average}
-          worst={this.state.worst}
-        />
+        {chart}
       </div>
     );
   };
