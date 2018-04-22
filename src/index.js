@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
 import Particles from 'react-particles-js';
 import particlesConfig from '../particles-config.json';
-import createBrowserHistory from 'history/createBrowserHistory'
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import styles from './styles.scss';
 
 import Dashboard from './components/Dashboard';
 import SortTest from './components/SortTest';
 
+// Further development will use history
 const history = createBrowserHistory();
 
 const App = () => {

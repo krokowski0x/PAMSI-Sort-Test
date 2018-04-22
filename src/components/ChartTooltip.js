@@ -3,12 +3,14 @@ import { Line } from 'react-chartjs-2';
 import ReactTooltip from 'react-tooltip';
 
 const ChartTooltip = (props) => {
+
+  // Array of 100 in-order intigers
   const sizes = [...Array(100).keys()];
   const chartTypes = {
     'O(n)': sizes,
-    'O(log n)': sizes.map(x => Math.log10(x)),
+    'O(log n)':  sizes.map(x => Math.log10(x)),
     'O(nlog n)': sizes.map(x => x*Math.log10(x)),
-    'O(n^2)': sizes.map(x => x**2)
+    'O(n^2)':    sizes.map(x => x**2)
   }
   const data = {
       labels: sizes,

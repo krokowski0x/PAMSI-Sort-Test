@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import PromiseWorker from 'promise-worker';
 
 import Placeholder from './Placeholder';
-import ArrayWorker from './../mocks/EndpointsMock.worker.js';
 import SortTab from './SortTab';
 import DescriptionTab from './DescriptionTab';
+
+// Web Workers were for mocking only
+import PromiseWorker from 'promise-worker';
+import ArrayWorker from './../mocks/EndpointsMock.worker.js';
 
 let worker = new ArrayWorker();
 let promiseWorker = new PromiseWorker(worker);
@@ -19,6 +21,7 @@ class Dashboard extends Component {
     }
   }
 
+  // As soon as component mounts, initialize arrays on the server
   componentDidMount() {
     fetch('/arraysInit')
     .then(msg => this.setState( {arraysReady: true} ));
@@ -29,12 +32,6 @@ class Dashboard extends Component {
       return (
         <main>
           <DescriptionTab />
-          <Link to='Bubble_sort'>
-            <SortTab type='Bubble Sort' worker={this.promiseWorker}/>
-          </Link>
-          <Link to='Insertion_sort'>
-            <SortTab type='Insertion Sort' worker={this.promiseWorker}/>
-          </Link>
           <Link to='Heapsort'>
             <SortTab type='Heap Sort' worker={this.promiseWorker}/>
           </Link>
@@ -50,9 +47,16 @@ class Dashboard extends Component {
           <Link to='Introsort'>
             <SortTab type='Intro Sort' worker={this.promiseWorker}/>
           </Link>
+          <Link to='Bubble_sort'>
+            <SortTab type='Bubble Sort' worker={this.promiseWorker}/>
+          </Link>
+          <Link to='Insertion_sort'>
+            <SortTab type='Insertion Sort' worker={this.promiseWorker}/>
+          </Link>
         </main>
       );
     else
+    // Render custom placeholder
       return (
       <main>
         <DescriptionTab />

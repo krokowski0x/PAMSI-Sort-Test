@@ -1,13 +1,13 @@
 import registerPromiseWorker from 'promise-worker/register';
 
 const xs = { len: 10000 };
-const s = { len: 50000 };
-const m = { len: 100000 };
-const l = { len: 500000 };
+const s =  { len: 50000 };
+const m =  { len: 100000 };
+const l =  { len: 500000 };
 const xl = { len: 1000000 };
 const arrays = { xs, s, m, l, xl };
 
-registerPromiseWorker( msg => {
+registerPromiseWorker(msg => {
   switch (msg.work) {
     case 'Initialize':
       return doStuff();

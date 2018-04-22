@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ContentLoader from 'react-content-loader';
 
 const Placeholder = (props) => {
+  // Different placeholder for Dashboard and DataCharts
   if (props.chart)
     return (
       <ContentLoader height={140} speed={1} primaryColor={'#333'} secondaryColor={'#999'}>

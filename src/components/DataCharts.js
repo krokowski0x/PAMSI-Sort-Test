@@ -6,9 +6,9 @@ function DataCharts(props) {
   let labels = [10,50,100,500,1000];
   const chartTypes = {
     'O(n)': labels,
-    'O(log n)': labels.map(x => Math.log10(x)),
+    'O(log n)':  labels.map(x => Math.log10(x)),
     'O(nlog n)': labels.map(x => x*Math.log10(x)),
-    'O(n^2)': labels.map(x => x**2)
+    'O(n^2)':    labels.map(x => x**2)
   }
 
   const opts = {
@@ -16,13 +16,15 @@ function DataCharts(props) {
       scales: {
           yAxes: [{
               ticks: {
+                // Max should be dynamically adjusted to the longest expected time
                 max: props.stats ? props.stats['reverse']['xl'] : 5000,
                 beginAtZero: true
               }
           }],
           xAxes: [{
               ticks: {
-                  min: 50
+                // Skipping 10k arrays is better for chart clarity
+                min: 50
               }
           }]
       }
@@ -100,6 +102,7 @@ function DataCharts(props) {
       </div>
     )
   else
+  // Render custom placeholder
     return (
       <div className='charts'>
         <Placeholder chart={true}/>
