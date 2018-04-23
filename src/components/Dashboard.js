@@ -47,12 +47,17 @@ class Dashboard extends Component {
           <Link to='Introsort'>
             <SortTab type='Intro Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='Bubble_sort'>
+          <Link to='Bubble_sort' className="danger">
             <SortTab type='Bubble Sort' worker={this.promiseWorker}/>
           </Link>
-          <Link to='Insertion_sort'>
+          <Link to='Insertion_sort' className="danger">
             <SortTab type='Insertion Sort' worker={this.promiseWorker}/>
           </Link>
+          <div className='warning'>
+            <h2>Warning!</h2>
+            <hr />
+            <h3>Alghoritms marked <span>RED</span> may cause painfully slow computation.</h3>
+          </div>
         </main>
       );
     else

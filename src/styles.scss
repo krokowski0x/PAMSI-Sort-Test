@@ -1,5 +1,6 @@
 $bg-color: #24292e;
 $tab-color: #41444c;
+$warning-color: #92140C;
 
 * {
   background-color: transparent;
@@ -72,6 +73,26 @@ main {
     margin: 0 auto;
     width: 100%;
     height: 100%;
+  }
+}
+
+.danger .sort-tab{
+  border-color: $warning-color;
+  h2 {
+    background-color: $warning-color;
+  }
+  hr {
+    border-color: $warning-color;
+  }
+}
+
+.warning {
+  padding: auto;
+  font-size: 120%;
+  text-align: center;
+  span {
+    font-weight: bold;
+    color: $warning-color;
   }
 }
 
