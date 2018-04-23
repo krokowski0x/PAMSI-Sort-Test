@@ -9,6 +9,31 @@ It fetches short description and parses big O notation from **Wikipedia** as wel
 **REST API endpoints**, which initializes arrays of different sizes **(10k to 1M elements)** and various stages of
 being sorted **(random, 25%, 99,7%, reverse order etc.)**. It lets you also display the result of sorting on charts.
 
+### Prerequisites
+
+If you want to make some changes, first you have to have [node with npm](https://nodejs.org/en/) installed.
+Then, you have to install dependencies:
+
+```
+npm i
+```
+
+### Installation
+
+After cloning this repository, in the project directory, you should run:
+
+```
+npm start
+```
+
+Then go to your browser of choice and go to the URL below:
+
+```
+localhost:3000
+```
+
+App should be running in your browser. Give it a try!
+
 ## Built With
 
 * [React](https://reactjs.org/) - king of all JS frameworks with [React Router](https://reacttraining.com/react-router/) for routing
