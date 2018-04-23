@@ -5,10 +5,12 @@ const app = express();
 const throng = require('throng');
 
 // 3000 in local enviroment and PORT for Heroku
-const WORKERS = process.env.WEB_CONCURRENCY || 1;
 const PORT = process.env.PORT || 3000;
-const BLITZ_KEY = process.env.BLITZ_KEY;
 
+// Workers are substitute for node clusters
+const WORKERS = process.env.WEB_CONCURRENCY || 1;
+
+// Node cluster replacement for Heroku deployment
 throng({
   workers: WORKERS,
   lifetime: Infinity
