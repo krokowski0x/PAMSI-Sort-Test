@@ -2,9 +2,17 @@
 const { performance } = require('perf_hooks');
 const express = require('express');
 const app = express();
+const throng = require('throng');
 
 // 3000 in local enviroment and PORT for Heroku
-const port = process.env.PORT || 3000;
+const WORKERS = process.env.WEB_CONCURRENCY || 1;
+const PORT = process.env.PORT || 3000;
+const BLITZ_KEY = process.env.BLITZ_KEY;
+
+throng({
+  workers: WORKERS,
+  lifetime: Infinity
+}, start);
 
 // Import all sort types
 const { Bubblesort } =    require('../src/sorts/BubbleSort');
@@ -64,7 +72,7 @@ app.get('/stats/:sortType', (request, response) => {
   }
 });
 
-app.listen(port, () => console.log('Sort Test app is running on port 3000!'));
+app.listen(PORT, () => console.log('Sort Test app is running on port 3000!'));
 
 const setup = (arrays) => {
   for (let array in arrays) {
