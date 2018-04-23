@@ -46,6 +46,8 @@ let stats = {
 // Indicates if arrays have been initialized
 let arraysReady = false;
 
+function start() {
+
 // Serve everything in dist/ folder
 app.use(express.static('dist'));
 
@@ -113,4 +115,5 @@ const runSorting = (field, sortType) => {
   } else {
     throw new Error('You can\'t sort arrays before initializing them!');
   }
+}
 }
