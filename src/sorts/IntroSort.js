@@ -1,16 +1,43 @@
 const { Heapsort } =      require('./HeapSort');
-const { InsertionSort } = require('./InsertionSort');
-const { Quicksort } =     require('./QuickSort');
+const { Insertionsort } = require('./InsertionSort');
 
 Array.prototype.Introsort = function() {
-  return IntrospectiveSort(this, this.length, Math.floor(2*Math.log2(this.length)));
+  return IntrospectiveSort(this, 0, this.length-1, Math.floor(2*Math.log2(this.length)));
 }
 
-function IntrospectiveSort (array, N, M) {
+function IntrospectiveSort (array, begin, end, M) {
+  let N = end - begin;
+  let partitionIndex = partition(array, 0, N);
   if (N < 16)
-    return array.InsertionSort();
-  else if (M <= 0)
+    return array.Insertionsort();
+  if (M <= partitionIndex)
     return array.Heapsort();
-  else
-    return array.Quicksort();
+
+  IntrospectiveSort (array, begin, partitionIndex-1, M-1);
+  IntrospectiveSort (array, partitionIndex+1, end, M-1);
+
+  return array;
+}
+
+function partition(items, left, right) {
+  let pivot = items[Math.floor((right + left) / 2)];
+  let i = left;
+  let j = right;
+
+  while (i <= j) {
+    while (items[i] < pivot) i++;
+    while (items[j] > pivot) j--;
+    if (i <= j) {
+      swap(items, i, j);
+      i++;
+      j--;
+    }
+  }
+  return i;
+}
+
+function swap(arr, i, j){
+   let temp = arr[i];
+   arr[i] = arr[j];
+   arr[j] = temp;
 }
