@@ -1,6 +1,7 @@
 import React from "react";
-import { Line } from 'react-chartjs-2';
+import { Line, Bar } from 'react-chartjs-2';
 import Placeholder from './Placeholder';
+import ReactTooltip from 'react-tooltip';
 
 function DataCharts(props) {
   let labels = [10,50,100,500,1000];
@@ -57,7 +58,7 @@ function DataCharts(props) {
 
   if (props.stats)
     return (
-      <div className='charts'>
+      <div data-tip data-for='chart' className='charts'>
         <Line data = {{
           labels,
           datasets: [{
@@ -116,6 +117,9 @@ function DataCharts(props) {
             data: props.stats['reverse']
           }
         ]}} options={opts} legend={legend} height={500}/>
+        <ReactTooltip id="chart" offset={{left: 500}} place="top" type="light" effect="solid">
+          Click on dataset to show it or hide it!
+        </ReactTooltip>
       </div>
     )
   else
