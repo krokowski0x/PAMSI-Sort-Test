@@ -90,14 +90,12 @@ function DataCharts(props) {
         label: '50% sorted',
         borderColor: '#EB6534',
         data: props.stats['50%']
-      },
-      {
+      },{
         borderWidth: 2,
         label: '75% sorted',
         borderColor: '#F3C98B ',
         data: props.stats['75%']
-      },
-      {
+      },{
         borderWidth: 2,
         label: '95% sorted',
         borderColor: '#C46D5E',
@@ -112,8 +110,7 @@ function DataCharts(props) {
         label: '99,7% sorted',
         borderColor: '#ECA400',
         data: props.stats['99,7%']
-      },
-      {
+      },{
         borderWidth: 2,
         label: 'Sorted in reverse order',
         borderColor: '#FFFFFF',
@@ -123,8 +120,8 @@ function DataCharts(props) {
 
     return (
       <div data-tip data-for='chart' className='charts'>
-        <Line data={data} options={opts} legend={legend} height={70} />
-        <Bar data={data} options={opts} legend={legend} height={50} />
+        <Line data={data} options={opts} legend={legend} height={80} />
+        <Bar data={data} options={opts} legend={legend} height={20} />
         <ReactTooltip id="chart" offset={{left: 500}} place="top" type="light" effect="solid">
           Click on dataset to show it or hide it!
         </ReactTooltip>
