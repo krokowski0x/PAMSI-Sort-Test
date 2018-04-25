@@ -11,6 +11,10 @@ $warning-color: #92140C;
   text-decoration: none;
 }
 
+body {
+    background-color: $bg-color;
+}
+
 .particles {
   background-color: $bg-color;
   position: absolute;
@@ -37,6 +41,7 @@ main {
 }
 
 .description-tab {
+  background-color: transparent;
   padding: 0;
   margin: 0;
   height: 100%;
@@ -44,9 +49,11 @@ main {
   text-align: center;
   border-radius: 5%;
   overflow: hidden;
-  grid-row: 1;
   grid-column-start: 1;
   grid-column-end: 5;
+  h1 {
+    margin: 1%;
+  }
   h3 {
     margin: 0;
     font-size: 70%;
@@ -54,6 +61,7 @@ main {
 }
 
 .sort-tab {
+  background-color: transparent;
   height: 30vh;
   border: 2px solid $tab-color;
   border-radius: 5%;
@@ -160,4 +168,7 @@ main {
 
 .charts {
   margin: 5% 2% 0 2%;
+  canvas {
+    padding-bottom: 2%;
+  }
 }
