@@ -17,8 +17,6 @@ function DataCharts(props) {
       scales: {
           yAxes: [{
               ticks: {
-                // Max should be dynamically adjusted to the longest expected time
-                max: props.stats ? props.stats['reverse']['xl'] : 5000,
                 beginAtZero: true
               },
               scaleLabel: {
@@ -56,73 +54,83 @@ function DataCharts(props) {
     }
   };
 
-  if (props.stats)
+  if (props.stats) {
+    const data = {
+      labels,
+      datasets: [{
+        label: 'Best Case',
+        borderWidth: 6,
+        borderColor: 'rgba(99,255,132,1)',
+        data: chartTypes[props.best],
+        hidden: true
+      },{
+        label: 'Average Case',
+        borderWidth: 6,
+        borderColor: 'rgba(54, 162, 235, 1)',
+        data: chartTypes[props.average],
+        hidden: true
+      },{
+        label: 'Worst Case',
+        borderWidth: 6,
+        borderColor: 'rgba(255,99,132,1)',
+        data: chartTypes[props.worst],
+        hidden: true
+      },{
+        borderWidth: 2,
+        label: 'Random order',
+        borderColor: '#DE369D',
+        data: props.stats['rand']
+      },{
+        borderWidth: 2,
+        label: '25% sorted',
+        borderColor: '#7DE2D1',
+        data: props.stats['25%']
+      },{
+        borderWidth: 2,
+        label: '50% sorted',
+        borderColor: '#EB6534',
+        data: props.stats['50%']
+      },
+      {
+        borderWidth: 2,
+        label: '75% sorted',
+        borderColor: '#F3C98B ',
+        data: props.stats['75%']
+      },
+      {
+        borderWidth: 2,
+        label: '95% sorted',
+        borderColor: '#C46D5E',
+        data: props.stats['95%']
+      },{
+        borderWidth: 2,
+        label: '99% sorted',
+        borderColor: '#BD1E1E',
+        data: props.stats['99%']
+      },{
+        borderWidth: 2,
+        label: '99,7% sorted',
+        borderColor: '#ECA400',
+        data: props.stats['99,7%']
+      },
+      {
+        borderWidth: 2,
+        label: 'Sorted in reverse order',
+        borderColor: '#FFFFFF',
+        data: props.stats['reverse']
+      }
+    ]};
+
     return (
       <div data-tip data-for='chart' className='charts'>
-        <Line data = {{
-          labels,
-          datasets: [{
-            label: 'Best Case',
-            borderWidth: 6,
-            borderColor: 'rgba(99,255,132,1)',
-            data: chartTypes[props.best],
-            hidden: true
-          },{
-            label: 'Average Case',
-            borderWidth: 6,
-            borderColor: 'rgba(54, 162, 235, 1)',
-            data: chartTypes[props.average],
-            hidden: true
-          },{
-            label: 'Worst Case',
-            borderWidth: 6,
-            borderColor: 'rgba(255,99,132,1)',
-            data: chartTypes[props.worst],
-            hidden: true
-          },{
-            label: 'Random order',
-            borderColor: '#DE369D',
-            data: props.stats['rand']
-          },{
-            label: '25% sorted',
-            borderColor: '#7DE2D1',
-            data: props.stats['25%']
-          },{
-            label: '50% sorted',
-            borderColor: '#EB6534',
-            data: props.stats['50%']
-          },
-          {
-            label: '75% sorted',
-            borderColor: '#F3C98B ',
-            data: props.stats['75%']
-          },
-          {
-            label: '95% sorted',
-            borderColor: '#C46D5E',
-            data: props.stats['95%']
-          },{
-            label: '99% sorted',
-            borderColor: '#BD1E1E',
-            data: props.stats['99%']
-          },{
-            backgroundColor: 'rgba(0,0,0,0)',
-            label: '99,7% sorted',
-            borderColor: '#ECA400',
-            data: props.stats['99,7%']
-          },
-          {
-            label: 'Sorted in reverse order',
-            borderColor: '#FFFFFF',
-            data: props.stats['reverse']
-          }
-        ]}} options={opts} legend={legend} height={500}/>
+        <Line data={data} options={opts} legend={legend} height={70} />
+        <Bar data={data} options={opts} legend={legend} height={50} />
         <ReactTooltip id="chart" offset={{left: 500}} place="top" type="light" effect="solid">
           Click on dataset to show it or hide it!
         </ReactTooltip>
       </div>
     )
-  else
+  } else
   // Render custom placeholder
     return (
       <div className='charts'>
