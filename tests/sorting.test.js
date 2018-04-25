@@ -10,7 +10,7 @@ let array = [];
 
 // Initialize array (1000 elements) array with random numbers
 beforeEach(() => {
-  return array = Array.from({length: 1e3}, () => Math.floor(Math.random() * 1e3));
+  return array = Array.from({length: 1e4}, () => Math.floor(Math.random() * 1e3));
 });
 
 describe('BubbleSort', () => {
