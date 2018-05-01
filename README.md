@@ -10,18 +10,25 @@ It fetches short description and parses big O notation from **Wikipedia** as wel
 **REST API endpoints**, which initializes arrays of different sizes **(10k to 1M elements)** and various stages of
 being sorted **(random, 25%, 99,7%, reverse order etc.)**. It lets you also display the result of sorting on charts.
 
+## Issues and further development
+
+* Node.js Clusters doesn't seem to work in parallel on Heroku - need to fix that.
+* Web Workers was intended to work with local storage, but size of arrays far exceeded it's size, so they ended up as a mock. Should be actually removed now.
+* Further development should consist of different sorting algorithms comparison mechanism.
+
 ### Prerequisites
 
 If you want to make some changes, first you have to have [node with npm](https://nodejs.org/en/) installed.
-Then, you have to install dependencies:
+
+### Installation
+
+After cloning this repository, in the project directory, you have to install dependencies:
 
 ```
 npm i
 ```
 
-### Installation
-
-After cloning this repository, in the project directory, you should run:
+Then you should run:
 
 ```
 npm start
