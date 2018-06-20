@@ -117,5 +117,4 @@ const runSorting = (field, sortType) => {
   } else {
     throw new Error('You can\'t sort arrays before initializing them!');
   }
-}
-}
+};

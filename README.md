@@ -1,14 +1,14 @@
 # Sort Test
 
-App for testing performance of different sorting algorithms.
+App for real-time performance testing of different sorting algorithms.
 **Live version** - https://pamsi-sort-test.herokuapp.com/
 
 ## Brief description
 
-App lets you learn about most important types of sorting and test their big O complexity in real-time.
+App lets you learn about most important types of sorting and test their big O time complexity in real-time.
 It fetches short description and parses big O notation from **Wikipedia** as well as calling it's own
 **REST API endpoints**, which initializes arrays of different sizes **(10k to 1M elements)** and various stages of
-being sorted **(random, 25%, 99,7%, reverse order etc.)**. It lets you also display the result of sorting on charts.
+being sorted **(random, 25%, 99,7%, reverse order etc.)**. It also lets you display the result of sorting on charts.
 
 ## Issues and further development
 
@@ -18,7 +18,7 @@ being sorted **(random, 25%, 99,7%, reverse order etc.)**. It lets you also disp
 
 ### Prerequisites
 
-If you want to make some changes, first you have to have [node with npm](https://nodejs.org/en/) installed.
+If you want to make some changes, first you have to have [Node with npm](https://nodejs.org/en/) installed.
 
 ### Installation
 
@@ -46,12 +46,12 @@ App should be running in your browser. Give it a try!
 
 * [React](https://reactjs.org/) - king of all JS frameworks with [React Router](https://reacttraining.com/react-router/) for routing
 * [Chart.js](https://www.chartjs.org/) - Most popular canvas-based charting library for JS
+* [Postman](https://www.getpostman.com/) - API endpoints testing tool
 * [Sass](https://sass-lang.com/) - most popular CSS preprocessor
 * [Webpack](https://webpack.js.org/) with [Babel](https://babeljs.io/) - bundler and compiler for newest ECMAScript standard
 * [Express](https://expressjs.com/) - Web framework for [Node.js](https://nodejs.org/en/)
 * [Heroku](https://www.heroku.com/) - Cloud platform which can run Node.js
 * [Web Workers](https://www.w3schools.com/html/html5_webworkers.asp) and [Node.js Clusters](https://nodejs.org/api/cluster.html) - JavaScript multi-threading
-* [Postman](https://www.getpostman.com/) - API endpoints testing tool
 * [Particles.js](https://vincentgarreau.com/particles.js/) - Fancy looking, canvas-based background
 
 ## Shoutout to
