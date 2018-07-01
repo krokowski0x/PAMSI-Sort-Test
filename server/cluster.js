@@ -21,4 +21,4 @@ if (cluster.isMaster) {
 
   // Workers run surver.js
   require('./server');
-}
+};

@@ -48,73 +48,75 @@ let stats = {
 // Indicates if arrays have been initialized
 let arraysReady = false;
 
+// Required by Heroku
 function start() {
 
-// Serve everything in dist/ folder
-app.use(express.static('dist'));
+  // Serve everything in dist/ folder
+  app.use(express.static('dist'));
 
-// Initial endpoint, fires when the app starts
-app.get('/arraysInit', (request, response) => {
-  try {
-    arrays = setup(arrays);
-    response.status(200).send('Arrays has been initialized!');
-  } catch (err) {
-    response.status(400).send(err);
-  }
-});
-
-// Perform all sorts with given sortType
-app.get('/stats/:sortType', (request, response) => {
-  try {
-    const type = request.params.sortType;
-
-    for (let field in stats)
-      runSorting(field, type);
-    response.status(200).send(stats);
-  } catch (err) {
-    response.status(400).send(err);
-  }
-});
-
-app.listen(PORT, () => console.log('Sort Test app is running on port 3000!'));
-
-const setup = (arrays) => {
-  for (let array in arrays) {
-
-    // Rand is generated based on len property
-    arrays[array]['rand'] = Array.from({length: arrays[array]['len']}, () => Math.floor(Math.random() * arrays[array]['len']));
-
-    let a = arrays[array]['rand'];
-
-    // a is split in two parts, one is sorted and they're concatenated again
-    arrays[array]['reverse'] =   a.concat().sort((a,b) => b-a);
-    arrays[array]['25%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.25),  ...a.concat().slice(0, arrays[array]['len']*0.75)];
-    arrays[array]['50%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.5),   ...a.concat().slice(0, arrays[array]['len']*0.5)];
-    arrays[array]['75%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.75),  ...a.concat().slice(0, arrays[array]['len']*0.25)];
-    arrays[array]['95%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.95),  ...a.concat().slice(0, arrays[array]['len']*0.05)];
-    arrays[array]['99%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.99),  ...a.concat().slice(0, arrays[array]['len']*0.01)];
-    arrays[array]['99,7%'] = [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.997), ...a.concat().slice(0, arrays[array]['len']*0.003)];
-  }
-  arraysReady = true;
-  return arrays;
-}
-
-// Do the sort, return stats
-const runSorting = (field, sortType) => {
-  let start = 0;
-  let end = 0;
-  let time = 0;
-
-  if (arraysReady) {
-    for (let array in arrays) {
-      start = performance.now();
-      arrays[array][field][sortType]();
-      end = performance.now();
-      time = end - start;
-      stats[field][array] = time.toFixed(3);
+  // Initial endpoint, fires when the app starts
+  app.get('/arraysInit', (request, response) => {
+    try {
+      arrays = setup(arrays);
+      response.status(200).send('Arrays has been initialized!');
+    } catch (err) {
+      response.status(400).send(err);
     }
-    return stats;
-  } else {
-    throw new Error('You can\'t sort arrays before initializing them!');
-  }
+  });
+
+  // Perform all sorts with given sortType
+  app.get('/stats/:sortType', (request, response) => {
+    try {
+      const type = request.params.sortType;
+
+      for (let field in stats)
+        runSorting(field, type);
+      response.status(200).send(stats);
+    } catch (err) {
+      response.status(400).send(err);
+    }
+  });
+
+  app.listen(PORT, () => console.log('Sort Test app is running on port 3000!'));
+
+  const setup = (arrays) => {
+    for (let array in arrays) {
+
+      // Rand is generated based on len property
+      arrays[array]['rand'] = Array.from({length: arrays[array]['len']}, () => Math.floor(Math.random() * arrays[array]['len']));
+
+      let a = arrays[array]['rand'];
+
+      // a is split in two parts, one is sorted and they're concatenated again
+      arrays[array]['reverse'] =   a.concat().sort((a,b) => b-a);
+      arrays[array]['25%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.25),  ...a.concat().slice(0, arrays[array]['len']*0.75)];
+      arrays[array]['50%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.5),   ...a.concat().slice(0, arrays[array]['len']*0.5)];
+      arrays[array]['75%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.75),  ...a.concat().slice(0, arrays[array]['len']*0.25)];
+      arrays[array]['95%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.95),  ...a.concat().slice(0, arrays[array]['len']*0.05)];
+      arrays[array]['99%'] =   [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.99),  ...a.concat().slice(0, arrays[array]['len']*0.01)];
+      arrays[array]['99,7%'] = [...a.concat().sort((a,b) => a-b).slice(0, arrays[array]['len']*0.997), ...a.concat().slice(0, arrays[array]['len']*0.003)];
+    }
+    arraysReady = true;
+    return arrays;
+  };
+
+  // Do the sort, return stats
+  const runSorting = (field, sortType) => {
+    let start = 0;
+    let end = 0;
+    let time = 0;
+
+    if (arraysReady) {
+      for (let array in arrays) {
+        start = performance.now();
+        arrays[array][field][sortType]();
+        end = performance.now();
+        time = end - start;
+        stats[field][array] = time.toFixed(3);
+      }
+      return stats;
+    } else {
+      throw new Error('You can\'t sort arrays before initializing them!');
+    }
+  };
 };
