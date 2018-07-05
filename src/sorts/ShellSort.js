@@ -12,4 +12,4 @@ Array.prototype.Shellsort = function() {
     }
   }
   return this;
-}
+};

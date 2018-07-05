@@ -7,7 +7,7 @@ Array.prototype.Mergesort = function() {
   let right = this.slice(middle);
 
   return merge(left.Mergesort(),right.Mergesort());
-  }
+};
 
 function merge(left, right) {
   let result = [];
@@ -23,6 +23,5 @@ function merge(left, right) {
       indexRight++;
     }
   }
-
   return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight));
-}
+};

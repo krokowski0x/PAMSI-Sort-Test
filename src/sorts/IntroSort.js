@@ -17,7 +17,7 @@ function IntrospectiveSort (array, begin, end, M) {
   IntrospectiveSort (array, partitionIndex+1, end, M-1);
 
   return array;
-}
+};
 
 function partition(items, left, right) {
   let pivot = items[Math.floor((right + left) / 2)];
@@ -28,16 +28,10 @@ function partition(items, left, right) {
     while (items[i] < pivot) i++;
     while (items[j] > pivot) j--;
     if (i <= j) {
-      swap(items, i, j);
+      [items[i], items[j]] = [items[j], items[i]];
       i++;
       j--;
     }
   }
   return i;
-}
-
-function swap(arr, i, j){
-   let temp = arr[i];
-   arr[i] = arr[j];
-   arr[j] = temp;
-}
+};
