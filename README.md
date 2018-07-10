@@ -10,9 +10,9 @@ It fetches short description and parses big O notation from **Wikipedia** as wel
 **REST API endpoints**, which initializes arrays of different sizes **(10k to 1M elements)** and various stages of
 being sorted **(random, 25%, 99,7%, reverse order etc.)**. It also lets you display the result of sorting on charts.
 
-![](SortTest1.png)
+![](src/SortTest1.png)
 
-![](SortTest2.png)
+![](src/SortTest2.png)
 
 ## Issues and further development
 
