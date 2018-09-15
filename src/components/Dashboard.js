@@ -13,13 +13,11 @@ let worker = new ArrayWorker();
 let promiseWorker = new PromiseWorker(worker);
 
 class Dashboard extends Component {
-	constructor(props) {
-		super(props);
-		this.worker = promiseWorker;
-		this.state = {
+		worker = promiseWorker;
+		state = {
 			arraysReady: false
 		};
-	}
+
 
 	// As soon as component mounts, initialize arrays on the server
 	componentDidMount() {

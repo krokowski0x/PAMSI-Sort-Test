@@ -10,8 +10,6 @@ const worker = new ArrayWorker();
 const promiseWorker = new PromiseWorker(worker);
 
 class SortTest extends Component {
-	constructor(props) {
-		super(props);
 		this.worker = promiseWorker;
 		this.state = {
 			// Getting the type from Router URL
@@ -22,7 +20,7 @@ class SortTest extends Component {
 
 		// Otherwise handleClick changes context of this
 		this.handleClick = this.handleClick.bind(this);
-	}
+
 
 	componentDidMount() {
 		// Short summary and title fetch
